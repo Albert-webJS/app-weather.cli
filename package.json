@@ -1,0 +1,24 @@
+{
+  "name": "wheather-cli",
+  "version": "1.0.0",
+  "description": "app weather-cli",
+  "main": "weather.js",
+  "bin": {
+    "weather": "weather.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node weather.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "weather",
+    "cli"
+  ],
+  "author": "albert <pivnenko.albert@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "node-modules": "^1.0.1"
+  }
+}
