@@ -1,11 +1,11 @@
 import chalk from "chalk";
 
 export const printSuccess = (message) => {
-  console.log(`${chalk.green.bold(" Success ")} ${message}`);
+  console.log(`${chalk.green.bold("Success ")} ${message}`);
 };
 
 export const printError = (error) => {
-  console.log(`${chalk.red.bold(" Error ")} ${error}`);
+  console.log(`${chalk.red.bold("Error ")} ${error}`);
 };
 
 export const printHelp = () => {
