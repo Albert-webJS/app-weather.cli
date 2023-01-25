@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 import { getArgs } from "./helpers/args.js";
-import { printSuccess, printError, printHelp } from "./service/log.service.js";
-import { saveKeyValue } from "./service/storage.service.js";
+import {
+  printSuccess,
+  printError,
+  printHelp,
+  printWeather,
+} from "./service/log.service.js";
+import { getKeyValue, saveKeyValue } from "./service/storage.service.js";
 import { TOKEN_KEYWORDS } from "./service/storage.service.js";
-import { getCurrentWheather } from "./service/api.service.js";
+import { getCurrentWheather, geyIconByValue } from "./service/api.service.js";
 
 export const saveToken = async (token) => {
   if (!token.length) {
@@ -33,8 +38,9 @@ const saveCity = async (city) => {
 
 const getForcast = async () => {
   try {
-    const wheather = await getCurrentWheather("kiev");
-    console.log(wheather);
+    const city = await getKeyValue(TOKEN_KEYWORDS.city);
+    const weather = await getCurrentWheather(city);
+    printWeather(weather, geyIconByValue(weather.weather[0].icon));
   } catch (error) {
     if (error.response.status === 404) {
       printError("Incorrect city specified");
