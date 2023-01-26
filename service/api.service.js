@@ -2,21 +2,21 @@ import axios from "axios";
 import { TOKEN_KEYWORDS, getKeyValue } from "./storage.service.js";
 
 export const geyIconByValue = (iconValue) => {
-  const key = iconValue.slice(0, -1);
-  const emoji = {
-    "01": "🌞",
-    "02": "🌤",
-    "03": "☁️",
-    "04": "☁️",
-    "09": "🌧",
-    '10': "🌦",
-    '11': "🌩",
-    '13': "❄",
-    '50': "🌫",
-  };
-  return emoji[key];
-};
+  const key = parseInt(iconValue);
+  const emoji = new Map([
+    [1, "🌞"],
+    [2, "🌤"],
+    [3, "☁️"],
+    [4, "☁️"],
+    [9, "🌧"],
+    [10, "🌦"],
+    [11, "🌩"],
+    [13, "❄"],
+    [50, "❄"],
+  ]);
 
+  return emoji.get(key);
+};
 
 export const getCurrentWheather = async (city) => {
   const token = process.env.TOKEN ?? (await getKeyValue(TOKEN_KEYWORDS.token));
