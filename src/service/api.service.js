@@ -38,5 +38,6 @@ export const getCurrentWheather = async (city) => {
     `https://api.openweathermap.org/data/2.5/weather`,
     params
   );
+  console.log("data: ", data)
   return data;
 };
