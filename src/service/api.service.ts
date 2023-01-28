@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from "axios";
-import { TOKEN_KEYWORDS, getKeyValue } from "../service/storage.service.js";
+import { store } from "../service/storage.service.js";
 import { IWeatherData } from "../interfaces/weatherData";
+import { environment as env } from "../environment/environment.js";
 
 export const getIconByValue = (iconValue: string): string => {
     const key: number = parseInt(iconValue);
@@ -40,16 +41,14 @@ const configParams = (city: string, token: string): Params => {
 }
 
 export const getCurrentWheather = async (city: string): Promise<IWeatherData> => {
-    const token: string | undefined = process.env.TOKEN ?? (await getKeyValue(TOKEN_KEYWORDS.token));
+    const token: string | undefined = process.env.TOKEN ?? (await store.getValueByKey(env.token));
     if (!token)
         throw new Error(
             "token is not definet, need set API key. Use the command -t [API_KEY]"
         );
 
     const params: Params = configParams(city, token)
-    const response: AxiosResponse<any, IWeatherData> = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather`,
-        params
-    );
+
+    const response: AxiosResponse<any, IWeatherData> = await axios.get(env.domain, params);
     return response.data as IWeatherData;
-};
+}; 
