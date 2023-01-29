@@ -8,7 +8,7 @@ interface IUserMessage {
     weather(response: IWeatherData, icon: string): void
 }
 
-class PrintUserMessages implements IUserMessage {
+class PrintMessage implements IUserMessage {
 
     success(message: string): void {
         console.log(`${chalk.green.bold("Success: ")} ${message}`);
@@ -48,4 +48,4 @@ class PrintUserMessages implements IUserMessage {
 };
 
 
-export const printUserMessages = new PrintUserMessages();
+export const printMessage = new PrintMessage();

@@ -1,7 +1,7 @@
 import { homedir } from "os";
 import { join } from "path";
 import { promises } from "fs";
-import { printUserMessages } from "./log.service";
+import { printMessage } from "./log.service";
 import { environment as env } from "../environment/environment";
 
 const filePath: string = join(homedir() + "/Documents", "weather-data.json");
@@ -37,27 +37,27 @@ class Store implements IStore {
 
     async saveToken(token: string): Promise<void> {
         if (!token.length) {
-            printUserMessages.error("no arguments, no token saved. Enter the token!");
+            printMessage.error("no arguments, no token saved. Enter the token!");
             return;
         }
         try {
             await this.saveValueByKey(env.token, token);
-            printUserMessages.success("Token is saved!");
+            printMessage.success("Token is saved!");
         } catch (error) {
-            if (error instanceof Error) printUserMessages.error(error.message);
+            if (error instanceof Error) printMessage.error(error.message);
         }
     }
 
     async saveCity(city: string): Promise<void> {
         if (!city.length) {
-            printUserMessages.error("no arguments, no city saved. Enter the city!");
+            printMessage.error("no arguments, no city saved. Enter the city!");
             return;
         }
         try {
             await this.saveValueByKey(env.city, city);
-            printUserMessages.success("City is saved!");
+            printMessage.success("City is saved!");
         } catch (error) {
-            if (error instanceof Error) printUserMessages.error(error.message);
+            if (error instanceof Error) printMessage.error(error.message);
         }
     };
 

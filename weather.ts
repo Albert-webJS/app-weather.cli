@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 import { environment as env } from "./src/environment/environment";
-import { getArgs } from "./src/helpers/args";
-import { printHandlerMessage } from "./src/service/log.service";
-import { store } from "./src/service/storage.service";
-import { getCurrentWheather, getIconByValue } from "./src/service/api.service";
+import { getArgs } from "./src/helpers";
+import { store, printMessage } from "./src/service";
+import { getCurrentWheather } from './src/dal'
+import { getIconByValue } from "./src/helpers";
 import { IWeatherData } from "./src/interfaces/weatherData";
-
 
 interface IApp {
     getForcast(): Promise<void>;
@@ -18,22 +17,22 @@ class App implements IApp {
             const city: string | undefined = await store.getValueByKey(env.city);
             const weather: IWeatherData = await getCurrentWheather(city!);
             const icon: string = getIconByValue(weather.weather.description)
-            printHandlerMessage.weather(weather, icon);
+            printMessage.weather(weather, icon);
         } catch (error: any) {
             if (error.response.status === 404) {
-                printHandlerMessage.error("Incorrect city specified");
+                printMessage.error("Incorrect city specified");
             }
             if (error.response.status === 401) {
-                printHandlerMessage.error("incorrectly specified token");
+                printMessage.error("Incorrectly specified token");
             }
-            printHandlerMessage.error(error.message);
+            printMessage.error(error.message);
         }
     };
 
     init(): Promise<void> | void {
         const args = getArgs(process.argv);
         if (args.h) {
-            return printHandlerMessage.help();
+            return printMessage.help();
         }
         if (args.s) {
             return store.saveCity(args.s as string);
