@@ -3,7 +3,9 @@
         It is very easy to use this application: 
           <br>
           - First, choose one of the methods that work for you: HTTPS, SSH, GitHub CLI to add code to your project.
+          <br>
           - run the command 'npm install'
+          <br>
           - with the command 'node' you can execute the main file, by default in this project this is 'weather.js'. Command for example 'node weather.js'
 
         But before you can use the app, you must pass the environment the keys you will use to query the current weather!
