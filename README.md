@@ -1,6 +1,7 @@
 ###  💻: ABOUT PROJECT :
 - :zap: Hi, this is the weather-cli utility.
         It is very easy to use this application: 
+          <br>
           - First, choose one of the methods that work for you: HTTPS, SSH, GitHub CLI to add code to your project.
           - run the command 'npm install'
           - with the command 'node' you can execute the main file, by default in this project this is 'weather.js'. Command for example 'node weather.js'
