@@ -1,14 +1,14 @@
 import chalk from "chalk";
 import { IWeatherData } from "../interfaces/weatherData";
 
-interface IUserMessage {
+interface IPrintMessage {
     success(message: string): void;
     error(error: string): void;
     help(): void;
     weather(response: IWeatherData, icon: string): void
 }
 
-class PrintMessage implements IUserMessage {
+class PrintMessage implements IPrintMessage {
 
     success(message: string): void {
         console.log(`${chalk.green.bold("Success: ")} ${message}`);

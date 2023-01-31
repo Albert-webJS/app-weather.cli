@@ -5,7 +5,7 @@ import { environment as env } from "../environment/environment";
 import { instance } from "./axios";
 
 export const getCurrentWheather = async (city: string): Promise<IWeatherData> => {
-    const tokenAcquisition  = await store.getValueByKey(env.token)
+    const tokenAcquisition = await store.getValueByKey(env.token)
     const token: string | undefined = process.env.TOKEN ?? tokenAcquisition;
     if (!token)
         throw new Error(
