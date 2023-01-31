@@ -1,70 +1,48 @@
 #!/usr/bin/env node
-import { getArgs } from "./src/helpers/args";
-import {
-    printSuccess,
-    printError,
-    printHelp,
-    printWeather,
-} from "./src/service/log.service";
-import { getKeyValue, saveKeyValue } from "./src/service/storage.service";
-import { TOKEN_KEYWORDS } from "./src/service/storage.service";
-import { getCurrentWheather, getIconByValue } from "./src/service/api.service";
+import { environment as env } from "./src/environment/environment";
+import { getArgs } from "./src/helpers";
+import { store, printMessage } from "./src/service";
+import { getCurrentWheather } from './src/dal'
+import { getIconByValue } from "./src/helpers";
 import { IWeatherData } from "./src/interfaces/weatherData";
 
-export const saveToken = async (token: string): Promise<void> => {
-    if (!token.length) {
-        printError("no arguments, no token saved. Enter the token!");
-        return;
-    }
-    try {
-        await saveKeyValue(TOKEN_KEYWORDS.token, token);
-        printSuccess("Token is saved!");
-    } catch (error) {
-        if (error instanceof Error) printError(error.message);
-    }
+interface IApp {
+    getForcast(): Promise<void>;
+    init(): Promise<void> | void;
 }
 
-const saveCity = async (city: string): Promise<void> => {
-    if (!city.length) {
-        printError("no arguments, no city saved. Enter the city!");
-        return;
-    }
-    try {
-        await saveKeyValue(TOKEN_KEYWORDS.city, city);
-        printSuccess("City is saved!");
-    } catch (error) {
-        if (error instanceof Error) printError(error.message);
-    }
-};
-
-const getForcast = async (): Promise<void> => {
-    try {
-        const city: string | undefined = await getKeyValue(TOKEN_KEYWORDS.city);
-        const weather: IWeatherData = await getCurrentWheather(city!);
-        printWeather(weather, getIconByValue(weather.weather.description));
-    } catch (error: any) {
-        if (error.response.status === 404) {
-            printError("Incorrect city specified");
+class App implements IApp {
+    async getForcast(): Promise<void> {
+        try {
+            const city: string | undefined = await store.getValueByKey(env.city);
+            const weather: IWeatherData = await getCurrentWheather(city!);
+            const icon: string = getIconByValue(weather.weather.description)
+            printMessage.weather(weather, icon);
+        } catch (error: any) {
+            if (error.response.status === 404) {
+                printMessage.error("Incorrect city specified");
+            }
+            if (error.response.status === 401) {
+                printMessage.error("Incorrectly specified token");
+            }
+            printMessage.error(error.message);
         }
-        if (error.response.status === 401) {
-            printError("incorrectly specified token");
+    };
+
+    init(): Promise<void> | void {
+        const args = getArgs(process.argv);
+        if (args.h) {
+            return printMessage.help();
         }
-        printError(error.message);
-    }
-};
+        if (args.s) {
+            return store.saveCity(args.s as string);
+        }
+        if (args.t) {
+            return store.saveToken(args.t as string);
+        }
+        this.getForcast();
+    };
+}
 
-const init = (): Promise<void> | void => {
-    const args = getArgs(process.argv);
-    if (args.h) {
-        return printHelp();
-    }
-    if (args.s) {
-        return saveCity(args.s as string);
-    }
-    if (args.t) {
-        return saveToken(args.t as string);
-    }
-    getForcast();
-};
-
-init();
+const app = new App();
+app.init();
