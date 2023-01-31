@@ -17,8 +17,8 @@
           ######
           For example command: 
           -- node weather.js -t [your API_KEY];
-          -- node wethaer.js -s [city of interest]ж
-          -- node weathr.js [default command, getting the current weather from your keys ]
+          -- node wethaer.js -s [city of interest];
+          -- node weathr.js [default command, getting the current weather from your keys];
         
 ---
 
