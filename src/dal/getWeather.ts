@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { IWeatherData } from "../interfaces/weatherData";
+import { IWeatherData } from "../interfaces/weather.data";
 import { store } from "../service/storage.service";
 import { environment as env } from "../environment/environment";
 import { instance } from "./axios";

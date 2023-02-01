@@ -4,7 +4,7 @@ import { getArgs } from "./src/helpers";
 import { store, printMessage } from "./src/service";
 import { getCurrentWheather } from './src/dal'
 import { getIconByValue } from "./src/helpers";
-import { IWeatherData } from "./src/interfaces/weatherData";
+import { IWeatherData } from "./src/interfaces/weather.data";
 
 interface IApp {
     getForcast(): Promise<void>;

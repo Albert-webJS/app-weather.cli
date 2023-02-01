@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { IWeatherData } from "../interfaces/weatherData";
+import { IWeatherData } from "../interfaces/weather.data";
 
 interface IPrintMessage {
     success(message: string): void;
