@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-import { environment as env } from "./src/environment/environment";
 import { getArgs, printMessage } from "./src/helpers";
 import { store } from "./src/service";
 import { getCurrentWhether } from './src/dal'
-import { getIconByValue } from "./src/helpers";
-import { IWhetherData } from "./src/entity/whether.data";
+import { IWeatherData } from "./src/entity/whether.data";
+import { environment as env } from "./src/environment/environment";
 
 interface IApp {
     getForecast(): Promise<void>;
@@ -17,8 +16,11 @@ class App implements IApp {
     async getForecast(): Promise<void> {
         try {
             const city: string | undefined = await store.getValueByKey(env.city);
-            const weather: IWhetherData = await getCurrentWhether(city!);
-            printMessage.weather(weather, "id icon"); // ! correct in params
+            if (!city) throw new Error("City is not defined, need set [CITY], Use the command '-s' [CITY]");
+            const weather: IWeatherData = await getCurrentWhether(city);
+            console.log({ weather })
+            printMessage.weather(weather);
+
         } catch (error: any) {
             if (error.response.status === 404) {
                 printMessage.error("Incorrect city specified");
@@ -32,7 +34,7 @@ class App implements IApp {
 
     async saveToken(token: string): Promise<void> {
         if (!token.length) {
-            printMessage.error("no arguments, no token saved. Enter the token!");
+            printMessage.error("The argument is not transmitted. It is necessary to set token. Use command '-t' [API_KEY].");
             return;
         }
         try {

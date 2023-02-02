@@ -1,12 +1,10 @@
-import { AxiosResponse } from "axios";
-import { IWhetherData } from "../entity/weather.data";
+import { IWeatherData } from "../entity/whether.data";
 import { store } from "../service/storage.service";
 import { environment as env } from "../environment/environment";
 import { instance } from "./axios";
 
-export const getCurrentWhether = async (city: string): Promise<IWhetherData> => {
-    if (!city) throw new Error("City is not defined, need set [CITY], Use the command -s [CITY]");
-    
+
+export const getCurrentWhether = async (city: string): Promise<IWeatherData> => {
     const tokenAcquisition = await store.getValueByKey(env.token)
     const token: string | undefined = process.env.TOKEN ?? tokenAcquisition;
     if (!token)
@@ -17,8 +15,15 @@ export const getCurrentWhether = async (city: string): Promise<IWhetherData> => 
     const options: Record<string, string> = {
         token,
         city,
-    }
+    };
 
-    const response: AxiosResponse<IWhetherData, any> = await instance.get("data/2.5/weather", options);
+    console.log({ city, token })
+
+    const response = await instance.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${token}`, {
+        params: {
+            lang: "ru",
+            units: "metric"
+        }
+    });
     return response.data;
 }; 

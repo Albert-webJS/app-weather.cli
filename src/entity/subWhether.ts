@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { IWhether } from "./whether.data";
+import { IWeather } from "./whether.data";
 
 export class SubWhether {
     private icon: string;
@@ -17,14 +17,14 @@ export class SubWhether {
         ['500d', "❄"],
     ]);
 
-    constructor(whether: IWhether) {
-        this.icon = whether.icon;
-        this.description = whether.description;
+    constructor(weather: IWeather) {
+        this.icon = weather.icon;
+        this.description = weather.description;
     }
 
 
 
-    getWhetherDescription(): string {
-        return `${this.emoji.get(this.icon)} ${chalk.blue(this.description)};`
+    public getWhetherDescription(): void {
+        console.log(`${this.emoji.get(this.icon)} ${chalk.blue(this.description)};`)
     }
 }

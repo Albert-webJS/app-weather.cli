@@ -6,7 +6,7 @@
   "bin": {
     "weather": "weather.js"
   },
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc --build",
     "start": "node weather.js",

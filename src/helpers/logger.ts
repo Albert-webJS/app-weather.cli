@@ -1,11 +1,11 @@
 import chalk from "chalk";
-import { IWhetherData } from "../entity/whether.data";
+import { SubWhether, Main, Weather, Wind, IWeatherData } from "../entity";
 
 interface IPrintMessage {
     success(message: string): void;
     error(error: string): void;
     help(): void;
-    weather(response: IWhetherData, icon: string): void
+    weather(response: IWeatherData, icon: string): void
 }
 
 class PrintMessage implements IPrintMessage {
@@ -29,22 +29,21 @@ class PrintMessage implements IPrintMessage {
         );
     };
 
-    weather({
-        name, 
-        weather: { description },
-        wind: { speed },
-        main: { temp, feels_like, humidity }}: IWhetherData,
-        icon: string): void {
-        console.log(`
-        ${chalk.yellow("WEATHER")} ${chalk.blue("in city")} ${chalk.green(name)}
-        ${icon} ${chalk.blue(description)};
-        🌡 ${chalk.blue("temp:")} ${chalk.yellow(Math.round(temp))}, ${chalk.blue("feels like: ")}${chalk.yellow(Math.round(feels_like))}
-        💦 ${chalk.blue("humidity: ")} ${chalk.yellow(humidity)}
-        💨 ${chalk.blue("wind speed: ")} ${chalk.yellow(speed)}
-        `
-        );
-    };
+    weather(dataWeather: IWeatherData): void {
+        const { weather, wind, main, name } = dataWeather;
+        const theWeather = new Weather(name)
+        const theSubWeather = new SubWhether(weather)
+        const theMainForecast = new Main(main);
+        const theWind = new Wind(wind);
 
+        console.log(`
+            ${theWeather.getWeatherFromTheCity()}
+            ${theSubWeather.getWhetherDescription()}
+            ${theMainForecast.getMainForecast()}
+            ${theWind.getWindSpeed()}
+        `
+        )
+    };
 };
 
 
