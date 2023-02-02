@@ -3,7 +3,7 @@ export interface Coord {
     lat: number;
 }
 
-export interface Whether {
+export interface IWhether {
     id: number;
     main: string;
     description: string;
@@ -37,7 +37,7 @@ export interface Sys {
 // TODO: Если бы это была модель, тебе не нужен был бы метод в log.service
 export interface IWhetherData {
     coord: Coord;
-    weather: Whether;
+    weather: IWhether;
     base: string;
     main: IMain;
     visibility: number;

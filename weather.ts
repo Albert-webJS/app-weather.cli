@@ -18,9 +18,7 @@ class App implements IApp {
         try {
             const city: string | undefined = await store.getValueByKey(env.city);
             const weather: IWhetherData = await getCurrentWhether(city!);
-            // TODO: эту иконку можно было бы поместить в модель погоды)
-            const icon: string = getIconByValue(weather.weather.description)
-            printMessage.weather(weather, icon);
+            printMessage.weather(weather, "id icon"); // ! correct in params
         } catch (error: any) {
             if (error.response.status === 404) {
                 printMessage.error("Incorrect city specified");
