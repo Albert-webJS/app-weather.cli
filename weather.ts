@@ -17,9 +17,11 @@ class App implements IApp {
         try {
             const city: string | undefined = await store.getValueByKey(env.city);
             if (!city) throw new Error("City is not defined, need set [CITY], Use the command '-s' [CITY]");
-            const weather: IWeatherData = await getCurrentWhether(city);
-            console.log({ weather })
-            printMessage.weather(weather);
+            else {
+                const weather: IWeatherData = await getCurrentWhether(city);
+                console.log({ weather })
+                printMessage.weather(weather);
+            }
 
         } catch (error: any) {
             if (error.response.status === 404) {
