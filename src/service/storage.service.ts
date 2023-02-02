@@ -44,4 +44,4 @@ class Store implements IStore {
     };
 }
 
-export const store = new Store("weather-data.json");
+export const store = new Store();
