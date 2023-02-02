@@ -1,16 +1,16 @@
-interface Coord {
+export interface Coord {
     lon: number;
     lat: number;
 }
 
-interface Weather {
+export interface Whether {
     id: number;
     main: string;
     description: string;
     icon: string;
 }
 
-interface Main {
+export interface IMain {
     temp: number;
     feels_like: number;
     temp_min: number;
@@ -21,27 +21,27 @@ interface Main {
     grnd_level: number;
 }
 
-interface Wind {
+export interface IWind {
     speed: number;
     deg: number;
     gust: number
 }
 
-interface Sys {
+export interface Sys {
     type: number,
     id: number,
     country: string,
     sunrise: number,
     sunset: number
 }
-
-export interface IWeatherData {
+// TODO: Если бы это была модель, тебе не нужен был бы метод в log.service
+export interface IWhetherData {
     coord: Coord;
-    weather: Weather;
+    weather: Whether;
     base: string;
-    main: Main;
+    main: IMain;
     visibility: number;
-    wind: Wind;
+    wind: IWind;
     clouds: { all: number };
     dt: number;
     sys: Sys

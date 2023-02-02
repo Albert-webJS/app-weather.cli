@@ -1,21 +1,24 @@
 #!/usr/bin/env node
 import { environment as env } from "./src/environment/environment";
-import { getArgs } from "./src/helpers";
-import { store, printMessage } from "./src/service";
-import { getCurrentWheather } from './src/dal'
+import { getArgs, printMessage } from "./src/helpers";
+import { store } from "./src/service";
+import { getCurrentWhether } from './src/dal'
 import { getIconByValue } from "./src/helpers";
-import { IWeatherData } from "./src/interfaces/weather.data";
+import { IWhetherData } from "./src/entity/whether.data";
 
 interface IApp {
-    getForcast(): Promise<void>;
+    getForecast(): Promise<void>;
     init(): Promise<void> | void;
+    saveToken(token: string): Promise<void>;
+    saveCity(city: string): Promise<void>;
 }
 
 class App implements IApp {
-    async getForcast(): Promise<void> {
+    async getForecast(): Promise<void> {
         try {
             const city: string | undefined = await store.getValueByKey(env.city);
-            const weather: IWeatherData = await getCurrentWheather(city!);
+            const weather: IWhetherData = await getCurrentWhether(city!);
+            // TODO: эту иконку можно было бы поместить в модель погоды)
             const icon: string = getIconByValue(weather.weather.description)
             printMessage.weather(weather, icon);
         } catch (error: any) {
@@ -29,18 +32,49 @@ class App implements IApp {
         }
     };
 
+    async saveToken(token: string): Promise<void> {
+        if (!token.length) {
+            printMessage.error("no arguments, no token saved. Enter the token!");
+            return;
+        }
+        try {
+            await store.saveValueByKey(env.token, token);
+            printMessage.success("Token is saved!");
+        } catch (error) {
+            // TODO: хмм.. а остальные ошибки просто скипнем?)
+            // не пойми неправильно, но что ты будешь делать если ты вводишь команду, а приложение не реагирует?)
+            if (error instanceof Error) printMessage.error(error.message);
+        }
+    }
+
+    async saveCity(city: string): Promise<void> {
+        if (!city.length) {
+            printMessage.error("no arguments, no city saved. Enter the city!");
+            return;
+        }
+        try {
+            await store.saveValueByKey(env.city, city);
+            printMessage.success("City is saved!");
+        } catch (error) {
+            if (error instanceof Error) printMessage.error(error.message);
+        }
+    };
+
     init(): Promise<void> | void {
+        // TODO: а если будет что-то непредвиденное? Типа: -- node weather.js -tr TEXT_SOME
         const args = getArgs(process.argv);
         if (args.h) {
             return printMessage.help();
         }
         if (args.s) {
-            return store.saveCity(args.s as string);
+            return this.saveCity(args.s as string);
         }
         if (args.t) {
-            return store.saveToken(args.t as string);
+            return this.saveToken(args.t as string);
         }
-        this.getForcast();
+        // TODO: тут ты ведь запускаешь выполнение программы? Лучше это делать командой или хотя бы вызывать отдельно)
+
+        this.getForecast();
     };
 }
 

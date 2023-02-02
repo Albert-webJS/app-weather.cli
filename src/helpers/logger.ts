@@ -1,11 +1,11 @@
 import chalk from "chalk";
-import { IWeatherData } from "../interfaces/weather.data";
+import { IWhetherData } from "../entity/whether.data";
 
 interface IPrintMessage {
     success(message: string): void;
     error(error: string): void;
     help(): void;
-    weather(response: IWeatherData, icon: string): void
+    weather(response: IWhetherData, icon: string): void
 }
 
 class PrintMessage implements IPrintMessage {
@@ -15,7 +15,7 @@ class PrintMessage implements IPrintMessage {
     }
 
     error(error: string): void {
-        console.log(`${chalk.red.bold("Error: ")} ${chalk.gray(error)}`);
+        console.error(`${chalk.red.bold("Error: ")} ${chalk.gray(error)}`);
     };
 
     help(): void {
@@ -33,7 +33,7 @@ class PrintMessage implements IPrintMessage {
         name, 
         weather: { description },
         wind: { speed },
-        main: { temp, feels_like, humidity }}: IWeatherData,
+        main: { temp, feels_like, humidity }}: IWhetherData,
         icon: string): void {
         console.log(`
         ${chalk.yellow("WEATHER")} ${chalk.blue("in city")} ${chalk.green(name)}
