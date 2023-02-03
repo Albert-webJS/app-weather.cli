@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { getArgs, printMessage } from "./src/helpers";
 import { store } from "./src/service";
-import { getCurrentWhether } from './src/dal'
+import { getCurrentWeather } from './src/dal'
 import { IWeatherData } from "./src/entity/whether.data";
 import { environment as env } from "./src/environment/environment";
 
@@ -18,7 +18,7 @@ class App implements IApp {
             const city: string | undefined = await store.getValueByKey(env.city);
             if (!city) throw new Error("City is not defined, need set [CITY], Use the command '-s' [CITY]");
             else {
-                const weather: IWeatherData = await getCurrentWhether(city);
+                const weather: IWeatherData = await getCurrentWeather(city);
                 console.log({ weather })
                 printMessage.weather(weather);
             }

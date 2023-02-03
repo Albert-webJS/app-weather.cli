@@ -1,5 +1,4 @@
 import chalk from "chalk";
-import { IWeatherData } from "./whether.data";
 
 
 export class Weather {
@@ -8,7 +7,7 @@ export class Weather {
         this.city = name;
     }
 
-    public getWeatherFromTheCity(): void {
-        console.log(`${chalk.yellow("WHETHER")} ${chalk.blue("in city")} ${chalk.green(this.city)}`)
+    public getWeatherText(): string {
+        return `${chalk.yellow("WEATHER")} ${chalk.blue("in city")} ${chalk.green(this.city)}`;
     }
 }

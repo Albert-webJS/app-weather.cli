@@ -1,3 +1,5 @@
+import { Main, SubWhether, Weather, Wind } from ".";
+
 export interface Coord {
     lon: number;
     lat: number;
@@ -37,7 +39,7 @@ export interface Sys {
 // TODO: Если бы это была модель, тебе не нужен был бы метод в log.service
 export interface IWeatherData {
     coord: Coord;
-    weather: IWeather;
+    weather: IWeather[];
     base: string;
     main: IMain;
     visibility: number;
@@ -49,4 +51,39 @@ export interface IWeatherData {
     id: number,
     name: string,
     cod: number
+}
+// naming
+export class WeatherData {
+    private weather: Weather;
+    private subWeather: SubWhether;
+    private main: Main;
+    private wind: Wind;
+
+    constructor(weather: Weather, subWeather: SubWhether, main: Main, wind: Wind) {
+        this.weather = weather;
+        this.subWeather = subWeather;
+        this.main = main;
+        this.wind = wind;
+    }
+
+    static createFromResponse(weather: IWeatherData): WeatherData {
+        const theWeather = new Weather(weather.name)
+        const theSubWeather = new SubWhether(weather.weather)
+        const theMainForecast = new Main(weather.main);
+        const theWind = new Wind(weather.wind);
+
+        return new WeatherData(theWeather, theSubWeather, theMainForecast, theWind)
+    }
+
+    getWeatherText(): string {
+        const weatherParts = [
+            this.weather.getWeatherText(),
+            this.subWeather.getWeatherText(),
+            this.main.getWeatherText(),
+            this.wind.getWeatherText(),
+        ];
+
+        return weatherParts.join();
+    }
+
 }

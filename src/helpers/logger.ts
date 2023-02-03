@@ -1,11 +1,11 @@
 import chalk from "chalk";
-import { SubWhether, Main, Weather, Wind, IWeatherData } from "../entity";
+import { SubWhether, Main, Weather, Wind, IWeatherData, WeatherData } from "../entity";
 
 interface IPrintMessage {
     success(message: string): void;
     error(error: string): void;
     help(): void;
-    weather(response: IWeatherData, icon: string): void
+    weather(response: WeatherData, icon: string): void
 }
 
 class PrintMessage implements IPrintMessage {
@@ -29,20 +29,8 @@ class PrintMessage implements IPrintMessage {
         );
     };
 
-    weather(dataWeather: IWeatherData): void {
-        const { weather, wind, main, name } = dataWeather;
-        const theWeather = new Weather(name)
-        const theSubWeather = new SubWhether(weather)
-        const theMainForecast = new Main(main);
-        const theWind = new Wind(wind);
-
-        console.log(`
-            ${theWeather.getWeatherFromTheCity()}
-            ${theSubWeather.getWhetherDescription()}
-            ${theMainForecast.getMainForecast()}
-            ${theWind.getWindSpeed()}
-        `
-        )
+    weather(dataWeather: WeatherData): void {
+        console.log(dataWeather.getWeatherText());
     };
 };
 

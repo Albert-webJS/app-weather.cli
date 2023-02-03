@@ -17,14 +17,16 @@ export class SubWhether {
         ['500d', "❄"],
     ]);
 
-    constructor(weather: IWeather) {
-        this.icon = weather.icon;
-        this.description = weather.description;
+    constructor(weathers: IWeather[]) {
+        weathers.forEach(weather => {
+            this.icon = weather.icon;
+            this.description = weather.description;
+        })
     }
 
 
 
-    public getWhetherDescription(): void {
-        console.log(`${this.emoji.get(this.icon)} ${chalk.blue(this.description)};`)
+    public getWeatherText(): string {
+        return `${this.emoji.get(this.icon)} ${chalk.blue(this.description)};`;
     }
 }

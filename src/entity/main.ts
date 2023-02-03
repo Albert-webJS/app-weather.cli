@@ -12,11 +12,10 @@ export class Main {
         this.humidity = main.humidity;
     }
 
-    public getMainForecast(): void {
-        console.log(`
+    public getWeatherText(): string {
+        return `
         🌡 ${chalk.blue("temp:")} ${chalk.yellow(Math.round(this.temp))}, ${chalk.blue("feels like: ")}${chalk.yellow(Math.round(this.feelsLike))}
         💦 ${chalk.blue("humidity: ")} ${chalk.yellow(this.humidity)}
-        `
-        )
+        `;
     }
 }
