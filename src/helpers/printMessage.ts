@@ -1,24 +1,24 @@
 import chalk from "chalk";
-import { SubWhether, Main, Weather, Wind, IWeatherData, WeatherData } from "../entity";
+import { ParseDataForWeather } from "../entity";
 
 interface IPrintMessage {
     success(message: string): void;
     error(error: string): void;
     help(): void;
-    weather(response: WeatherData, icon: string): void
+    weather(response: ParseDataForWeather): void
 }
 
 class PrintMessage implements IPrintMessage {
 
-    success(message: string): void {
+    public success(message: string): void {
         console.log(`${chalk.green.bold("Success: ")} ${message}`);
     }
 
-    error(error: string): void {
+    public error(error: string): void {
         console.error(`${chalk.red.bold("Error: ")} ${chalk.gray(error)}`);
-    };
+    }
 
-    help(): void {
+    public help(): void {
         console.log(`
         ${chalk.cyan("HELP")}
         ${chalk.redBright("No parameters")}: weather output ${chalk.dim("(default)")};
@@ -27,11 +27,11 @@ class PrintMessage implements IPrintMessage {
         ${chalk.blueBright.bold("-h")}: for output help;
         `
         );
-    };
+    }
 
-    weather(dataWeather: WeatherData): void {
+    public weather(dataWeather: ParseDataForWeather): void {
         console.log(dataWeather.getWeatherText());
-    };
+    }
 };
 
 

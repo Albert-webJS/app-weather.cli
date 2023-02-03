@@ -12,7 +12,7 @@ class Store implements IStore {
     private nameForFile: string = "weather-data.json"
     private filePath: string = join(homedir() + "/Documents", this.nameForFile)
 
-    async saveValueByKey(key: string, value: string): Promise<void> {
+    public async saveValueByKey(key: string, value: string): Promise<void> {
         const isPathExist = await this.isPathExist(this.filePath);
         let data: Record<string, string> = {};
         if (isPathExist) {
@@ -23,7 +23,7 @@ class Store implements IStore {
         await promises.writeFile(this.filePath, JSON.stringify(data));
     };
 
-    async getValueByKey(key: string): Promise<string | undefined> {
+    public async getValueByKey(key: string): Promise<string | undefined> {
         const isPathExist = await this.isPathExist(this.filePath)
         if (!isPathExist) {
             return undefined

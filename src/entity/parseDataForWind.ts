@@ -2,7 +2,7 @@ import chalk from "chalk";
 import { IWind } from "./whether.data";
 
 
-export class Wind {
+export class ParseDataForWind {
     private speed: number
     constructor(wind: IWind) {
         this.speed = wind.speed;

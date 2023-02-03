@@ -2,7 +2,7 @@
 import { getArgs, printMessage } from "./src/helpers";
 import { store } from "./src/service";
 import { getCurrentWeather } from './src/dal'
-import { IWeatherData } from "./src/entity/whether.data";
+import { ParseDataForWeather } from "./src/entity";
 import { environment as env } from "./src/environment/environment";
 
 interface IApp {
@@ -18,7 +18,7 @@ class App implements IApp {
             const city: string | undefined = await store.getValueByKey(env.city);
             if (!city) throw new Error("City is not defined, need set [CITY], Use the command '-s' [CITY]");
             else {
-                const weather: IWeatherData = await getCurrentWeather(city);
+                const weather: ParseDataForWeather = await getCurrentWeather(city);
                 console.log({ weather })
                 printMessage.weather(weather);
             }

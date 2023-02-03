@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { IWeather } from "./whether.data";
 
-export class SubWhether {
+export class ParseDescriptionOfStateWeather  {
     private icon: string;
     private description: string;
 
@@ -13,7 +13,7 @@ export class SubWhether {
         ['90d', "🌧"],
         ['100d', "🌦"],
         ['110d', "🌩"],
-        ['130d', "❄"],
+        ['13d', "❄"],
         ['500d', "❄"],
     ]);
 
@@ -23,8 +23,6 @@ export class SubWhether {
             this.description = weather.description;
         })
     }
-
-
 
     public getWeatherText(): string {
         return `${this.emoji.get(this.icon)} ${chalk.blue(this.description)};`;
