@@ -13,9 +13,7 @@ export class ParseDataForMain {
     }
 
     public getWeatherText(): string {
-        return `
-        🌡 ${chalk.blue("temp:")} ${chalk.yellow(Math.round(this.temp))}, ${chalk.blue("feels like: ")}${chalk.yellow(Math.round(this.feelsLike))}
-        💦 ${chalk.blue("humidity: ")} ${chalk.yellow(this.humidity)}
-        `;
+        return `🌡  ${chalk.blue("temp:")} ${chalk.yellow(Math.round(this.temp))} ${chalk.blue("feels like: ")}${chalk.yellow(Math.round(this.feelsLike))}
+                💦 ${chalk.blue("humidity: ")} ${chalk.yellow(this.humidity)}`
     }
 }

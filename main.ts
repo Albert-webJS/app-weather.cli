@@ -19,7 +19,6 @@ class App implements IApp {
             if (!city) throw new Error("City is not defined, need set [CITY], Use the command '-s' [CITY]");
             else {
                 const weather: ParseDataForWeather = await getCurrentWeather(city);
-                console.log({ weather })
                 printMessage.weather(weather);
             }
 
@@ -43,8 +42,6 @@ class App implements IApp {
             await store.saveValueByKey(env.token, token);
             printMessage.success("Token is saved!");
         } catch (error) {
-            // TODO: хмм.. а остальные ошибки просто скипнем?)
-            // не пойми неправильно, но что ты будешь делать если ты вводишь команду, а приложение не реагирует?)
             if (error instanceof Error) printMessage.error(error.message);
         }
     }

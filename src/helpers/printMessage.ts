@@ -1,4 +1,5 @@
 import chalk from "chalk";
+import dedent from 'dedent'
 import { ParseDataForWeather } from "../entity";
 
 interface IPrintMessage {
@@ -11,21 +12,21 @@ interface IPrintMessage {
 class PrintMessage implements IPrintMessage {
 
     public success(message: string): void {
-        console.log(`${chalk.green.bold("Success: ")} ${message}`);
+        console.log(`${chalk.green.bold("Success:")} ${message}`);
     }
 
     public error(error: string): void {
-        console.error(`${chalk.red.bold("Error: ")} ${chalk.gray(error)}`);
+        console.error(`${chalk.red.bold("Error:")} ${chalk.gray(error)}`);
     }
 
     public help(): void {
-        console.log(`
-        ${chalk.cyan("HELP")}
+        console.log(
+            dedent(`${chalk.cyan("HELP")}
         ${chalk.redBright("No parameters")}: weather output ${chalk.dim("(default)")};
         ${chalk.blueBright.bold("-s [CITY]")}: to set the city; 
         ${chalk.blueBright.bold("-t [API_KEY]")}: to save the token;
         ${chalk.blueBright.bold("-h")}: for output help;
-        `
+            `)
         );
     }
 
@@ -33,6 +34,5 @@ class PrintMessage implements IPrintMessage {
         console.log(dataWeather.getWeatherText());
     }
 };
-
 
 export const printMessage = new PrintMessage();

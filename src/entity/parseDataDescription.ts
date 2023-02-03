@@ -6,15 +6,15 @@ export class ParseDescriptionOfStateWeather  {
     private description: string;
 
     private emoji: Map<string, string> = new Map([
-        ['10d', "🌞"],
-        ['20d', "🌤"],
-        ['30d', "☁️"],
-        ['40d', "☁️"],
-        ['90d', "🌧"],
+        ['01d', "🌞"],
+        ['02d', "🌤"],
+        ['03n', "☁️"],
+        ['04n', "☁️"],
+        ['09d', "🌧"],
         ['100d', "🌦"],
         ['110d', "🌩"],
         ['13d', "❄"],
-        ['500d', "❄"],
+        ['50d', "❄"],
     ]);
 
     constructor(weathers: IWeather[]) {
@@ -25,6 +25,6 @@ export class ParseDescriptionOfStateWeather  {
     }
 
     public getWeatherText(): string {
-        return `${this.emoji.get(this.icon)} ${chalk.blue(this.description)};`;
+        return `${this.emoji.get(this.icon)}  ${chalk.blue(this.description)}`
     }
 }

@@ -1,4 +1,11 @@
-import { IWeatherData, ParseDataForMain, ParseDescriptionOfStateWeather, ParseDataForNameCity, ParseDataForWind } from ".";
+import dedent from 'dedent';
+import { 
+    IWeatherData, 
+    ParseDataForMain, 
+    ParseDescriptionOfStateWeather, 
+    ParseDataForNameCity, 
+    ParseDataForWind
+} from ".";
 
 export class ParseDataForWeather {
     private parseDataForNameCity: ParseDataForNameCity;
@@ -37,9 +44,9 @@ export class ParseDataForWeather {
             this.parseDataForNameCity.getWeatherText(),
             this.parseDescriptionOfStateWeather.getWeatherText(),
             this.parseDataForMain.getWeatherText(),
-            this.parseDataForWind.getWeatherText(),
+            this.parseDataForWind.getWeatherText()
         ];
 
-        return weatherParts.join("\n");
+        return dedent(weatherParts.join("\n"))
     }
 };

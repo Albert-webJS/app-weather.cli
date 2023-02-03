@@ -9,6 +9,6 @@ export class ParseDataForWind {
     }
 
     public getWeatherText(): string {
-        return `💨 ${chalk.blue('wind speed: ')}: ${chalk.yellow(this.speed)}`;
+        return `💨 ${chalk.blue('wind speed:')} ${chalk.yellow(this.speed)}`;
     }
 }
