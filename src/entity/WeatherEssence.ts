@@ -7,7 +7,7 @@ import {
     ParseDataForWind
 } from ".";
 
-export class ParseDataForWeather {
+export class WeatherEssence {
     private parseDataForNameCity: ParseDataForNameCity;
     private parseDescriptionOfStateWeather: ParseDescriptionOfStateWeather;
     private parseDataForMain: ParseDataForMain;
@@ -25,13 +25,13 @@ export class ParseDataForWeather {
         this.parseDataForWind = parseDataForWind;
     }
 
-    static createFromResponse(weather: IWeatherData): ParseDataForWeather {
+    static createFromResponse(weather: IWeatherData): WeatherEssence {
         const parseDataForNameCityWeather = new ParseDataForNameCity(weather.name)
         const parseDescriptionOfStateWeather = new ParseDescriptionOfStateWeather(weather.weather)
         const parseDataForMain = new ParseDataForMain(weather.main);
         const PparseDataForWind = new ParseDataForWind(weather.wind);
 
-        return new ParseDataForWeather(
+        return new WeatherEssence(
             parseDataForNameCityWeather,
             parseDescriptionOfStateWeather,
             parseDataForMain,

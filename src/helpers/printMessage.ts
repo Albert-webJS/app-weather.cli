@@ -1,12 +1,12 @@
 import chalk from "chalk";
 import dedent from 'dedent'
-import { ParseDataForWeather } from "../entity";
+import { WeatherEssence } from "../entity";
 
 interface IPrintMessage {
     success(message: string): void;
     error(error: string): void;
     help(): void;
-    weather(response: ParseDataForWeather): void
+    weather(response: WeatherEssence): void
 }
 
 class PrintMessage implements IPrintMessage {
@@ -30,7 +30,7 @@ class PrintMessage implements IPrintMessage {
         );
     }
 
-    public weather(dataWeather: ParseDataForWeather): void {
+    public weather(dataWeather: WeatherEssence): void {
         console.log(dataWeather.getWeatherText());
     }
 };

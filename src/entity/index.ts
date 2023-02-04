@@ -3,4 +3,4 @@ export * from "./parseDataDescription";
 export * from "./parseDataForMain";
 export * from "./parseDataForWind";
 export * from "./whether.data";
-export * from './parseDataForWeather'
+export * from './WeatherEssence'

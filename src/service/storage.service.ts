@@ -9,8 +9,8 @@ interface IStore {
 }
 
 class Store implements IStore {
-    private nameForFile: string = "weather-data.json"
-    private filePath: string = join(homedir() + "/Documents", this.nameForFile)
+    private nameForFile: string = "weather-data.json";
+    private filePath: string = join(homedir() + "/Documents", this.nameForFile);
 
     public async saveValueByKey(key: string, value: string): Promise<void> {
         const isPathExist = await this.isPathExist(this.filePath);
