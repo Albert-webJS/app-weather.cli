@@ -6,7 +6,7 @@
           <br>
           - run the command 'npm install'
           <br>
-          - with the command 'node' you can execute the main file, by default in this project this is 'weather.js'. Command for example 'node weather.js'
+          - with the command 'node' you can execute the main file, by default in this project this is 'main.js'. Command for example 'node dist/main.js'
 
         But before you can use the app, you must pass the environment the keys you will use to query the current weather!
           Key arguments:
@@ -16,9 +16,9 @@
           - '-h': with this command you call the command description and usage rule in the application itself 
           ######
           For example command: 
-          -- node weather.js -t [your API_KEY];
-          -- node wethaer.js -s [city of interest];
-          -- node weathr.js [default command, getting the current weather from your keys];
+          -- node mian.js -t [your API_KEY];
+          -- node main.js -s [city of interest];
+          -- node main.js [default command, getting the current weather from your keys];
         
 ---
 
