@@ -60,7 +60,7 @@ class App implements IApp {
     };
 
     init(): Promise<void> | void {
-        // TODO: а если будет что-то непредвиденное? Типа: -- node weather.js -tr TEXT_SOME
+        // TODO: -- node weather.js -tr TEXT_SOME
         const args = getArgs(process.argv);
         if (args.h) {
             return printMessage.help();
@@ -71,7 +71,7 @@ class App implements IApp {
         if (args.t) {
             return this.saveToken(args.t as string);
         }
-        // TODO: тут ты ведь запускаешь выполнение программы? Лучше это делать командой или хотя бы вызывать отдельно)
+        // TODO: запускать командой отдельно !
 
         this.getForecast();
     };

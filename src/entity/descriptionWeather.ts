@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { IWeather } from "./whether.data";
 
-export class ParseDescriptionOfStateWeather  {
+export class DescriptionWeather  {
     private icon: string;
     private description: string;
 
@@ -13,7 +13,7 @@ export class ParseDescriptionOfStateWeather  {
         ['09d', "🌧"],
         ['100d', "🌦"],
         ['110d', "🌩"],
-        ['13d', "❄"],
+        ['13n', "❄"],
         ['50d', "❄"],
     ]);
 

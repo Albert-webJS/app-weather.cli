@@ -1,50 +1,50 @@
 import dedent from 'dedent';
-import { 
-    IWeatherData, 
-    ParseDataForMain, 
-    ParseDescriptionOfStateWeather, 
-    ParseDataForNameCity, 
-    ParseDataForWind
+import {
+    IWeatherData,
+    MainWeatherInfo,
+    DescriptionWeather,
+    TitleWeather,
+    WindWeather
 } from ".";
 
 export class WeatherEssence {
-    private parseDataForNameCity: ParseDataForNameCity;
-    private parseDescriptionOfStateWeather: ParseDescriptionOfStateWeather;
-    private parseDataForMain: ParseDataForMain;
-    private parseDataForWind: ParseDataForWind;
+    private _title: TitleWeather;
+    private _description: DescriptionWeather;
+    private _main: MainWeatherInfo;
+    private _wind: WindWeather;
 
     constructor(
-        parseDataForCity: ParseDataForNameCity,
-        parseDescriptionOfState: ParseDescriptionOfStateWeather,
-        parseDataForMain: ParseDataForMain,
-        parseDataForWind: ParseDataForWind
+        title: TitleWeather,
+        description: DescriptionWeather,
+        main: MainWeatherInfo,
+        wind: WindWeather
     ) {
-        this.parseDataForNameCity = parseDataForCity;
-        this.parseDescriptionOfStateWeather = parseDescriptionOfState;
-        this.parseDataForMain = parseDataForMain;
-        this.parseDataForWind = parseDataForWind;
+        this._title = title;
+        this._description = description;
+        this._main = main;
+        this._wind = wind;
     }
 
     static createFromResponse(weather: IWeatherData): WeatherEssence {
-        const parseDataForNameCityWeather = new ParseDataForNameCity(weather.name)
-        const parseDescriptionOfStateWeather = new ParseDescriptionOfStateWeather(weather.weather)
-        const parseDataForMain = new ParseDataForMain(weather.main);
-        const PparseDataForWind = new ParseDataForWind(weather.wind);
+        const title = new TitleWeather(weather.name)
+        const description = new DescriptionWeather(weather.weather)
+        const main = new MainWeatherInfo(weather.main);
+        const wind = new WindWeather(weather.wind);
 
         return new WeatherEssence(
-            parseDataForNameCityWeather,
-            parseDescriptionOfStateWeather,
-            parseDataForMain,
-            PparseDataForWind,
+            title,
+            description,
+            main,
+            wind,
         );
     }
 
     public getWeatherText(): string {
         const weatherParts = [
-            this.parseDataForNameCity.getWeatherText(),
-            this.parseDescriptionOfStateWeather.getWeatherText(),
-            this.parseDataForMain.getWeatherText(),
-            this.parseDataForWind.getWeatherText()
+            this._title.getWeatherText(),
+            this._description.getWeatherText(),
+            this._main.getWeatherText(),
+            this._wind.getWeatherText()
         ];
 
         return dedent(weatherParts.join("\n"))

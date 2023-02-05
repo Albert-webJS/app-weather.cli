@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { IMain } from "./whether.data";
 
-export class ParseDataForMain {
+export class MainWeatherInfo {
     private temp: number;
     private feelsLike: number;
     private humidity: number;

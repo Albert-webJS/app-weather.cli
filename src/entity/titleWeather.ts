@@ -1,7 +1,7 @@
 import chalk from "chalk";
 
 
-export class ParseDataForNameCity {
+export class TitleWeather {
     private city: string;
     constructor(name: string) {
         this.city = name;
