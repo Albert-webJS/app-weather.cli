@@ -9,7 +9,7 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc --build",
-    "start": "node weather.js",
+    "start": "node ./dist/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
