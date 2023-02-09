@@ -1,3 +1,12 @@
+<div align="center">
+        <img src="https://media.giphy.com/media/jpQ0o7Y5SNZBcSKxBK/giphy.gif" alt="logo for this app" width="400"/>
+        <div>
+                <img src="https://img.shields.io/badge/-TypeScript-informational" alt="ts version"/>
+                <img src="https://img.shields.io/badge/JavaScript-ES6%2B-yellow" alt="js version"/>
+                <img src="https://img.shields.io/badge/-NodeJs-brightgreen" alt="node version"/>
+        </div>
+</div>
+
 ###  💻: ABOUT PROJECT :
 - :zap: Hi, this is the weather-cli utility.
         It is very easy to use this application: 
