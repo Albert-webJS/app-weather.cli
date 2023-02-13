@@ -1,30 +1,30 @@
-import chalk from "chalk";
-import { IWeather } from "./whether.data";
+import { IWeather } from './whether.data';
+import chalk from 'chalk';
 
-export class DescriptionWeather  {
-    private icon: string;
-    private description: string;
+export class DescriptionWeather {
+	private icon: string;
+	private description: string;
 
-    private emoji: Map<string, string> = new Map([
-        ['01d', "🌞"],
-        ['02d', "🌤"],
-        ['03n', "☁️"],
-        ['04n', "☁️"],
-        ['09d', "🌧"],
-        ['100d', "🌦"],
-        ['110d', "🌩"],
-        ['13n', "❄"],
-        ['50d', "❄"],
-    ]);
+	private emoji: Map<string, string> = new Map([
+		['01d', '🌞'],
+		['02d', '🌤'],
+		['03n', '☁️'],
+		['04n', '☁️'],
+		['09d', '🌧'],
+		['100d', '🌦'],
+		['110d', '🌩'],
+		['13n', '❄'],
+		['50d', '❄'],
+	]);
 
-    constructor(weathers: IWeather[]) {
-        weathers.forEach(weather => {
-            this.icon = weather.icon;
-            this.description = weather.description;
-        })
-    }
+	constructor(weathers: IWeather[]) {
+		weathers.forEach((weather) => {
+			this.icon = weather.icon;
+			this.description = weather.description;
+		});
+	}
 
-    public getWeatherText(): string {
-        return `${this.emoji.get(this.icon)}  ${chalk.blue(this.description)}`
-    }
+	public getWeatherText(): string {
+		return `${this.emoji.get(this.icon)}  ${chalk.blue(this.description)}`;
+	}
 }

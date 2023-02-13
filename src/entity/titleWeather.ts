@@ -1,13 +1,12 @@
-import chalk from "chalk";
-
+import chalk from 'chalk';
 
 export class TitleWeather {
-    private city: string;
-    constructor(name: string) {
-        this.city = name;
-    }
+	private city: string;
+	constructor(name: string) {
+		this.city = name;
+	}
 
-    public getWeatherText(): string {
-        return `${chalk.yellow("WEATHER")} ${chalk.blue("in city")} ${chalk.green(this.city)}`;
-    }
+	public getWeatherText(): string {
+		return `${chalk.yellow('WEATHER')} ${chalk.blue('in city')} ${chalk.green(this.city)}`;
+	}
 }
