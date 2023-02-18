@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import { getArgs, printMessage } from './helpers';
+import { AxiosError } from 'axios';
 import { WeatherEssence } from './entity';
 import { environment as env } from './environment/environment';
 import { getCurrentWeather } from './dal';
 import { store } from './service';
-import { AxiosError } from 'axios';
 
 interface IApp {
 	getForecast(): Promise<void>;
@@ -65,7 +65,6 @@ class App implements IApp {
 	}
 
 	init(): Promise<void> | void {
-		// TODO: -- node weather.js -tr TEXT_SOME
 		const args = getArgs(process.argv);
 		if (args.h) {
 			return printMessage.help();
@@ -76,9 +75,10 @@ class App implements IApp {
 		if (args.t) {
 			return this.saveToken(args.t as string);
 		}
-		// TODO: запускать командой отдельно !
-
-		this.getForecast();
+		if (args.init) {
+			return this.getForecast();
+		}
+		printMessage.error('This command does not exist or not specified');
 	}
 }
 

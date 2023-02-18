@@ -11,7 +11,7 @@
     "build": "tsc --build",
     "lint": "eslint ./src/**",
     "lint:fix": "eslint ./src/** --fix",
-    "start": "node ./dist/main.js",
+    "start": "node dist/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
