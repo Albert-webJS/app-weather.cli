@@ -4,6 +4,7 @@ import { WeatherEssence } from './entity';
 import { environment as env } from './environment/environment';
 import { getCurrentWeather } from './dal';
 import { store } from './service';
+import { AxiosError } from 'axios';
 
 interface IApp {
 	getForecast(): Promise<void>;
@@ -22,14 +23,16 @@ class App implements IApp {
 				const weather: WeatherEssence = await getCurrentWeather(city);
 				printMessage.weather(weather);
 			}
-		} catch (error: any) {
-			if (error.response.status === 404) {
-				printMessage.error('Incorrect city specified');
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				if (error.response?.status === 404) {
+					printMessage.error('Incorrect city specified');
+				}
+				if (error.response?.status === 401) {
+					printMessage.error('Incorrectly specified token');
+				}
+				printMessage.error(error.message);
 			}
-			if (error.response.status === 401) {
-				printMessage.error('Incorrectly specified token');
-			}
-			printMessage.error(error.message);
 		}
 	}
 
